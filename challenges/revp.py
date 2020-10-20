@@ -1,17 +1,6 @@
 from Bio import SeqIO
+from lib import reverse_complement
 
-complements = {
-    'A' : 'T',
-    'C' : 'G',
-    'G' : 'C',
-    'T' : 'A'
-}
-
-def complement(seq):        
-    return ''.join([complements[c] for c in seq])
-
-def reverse_complement(seq):
-    return complement(seq[::-1])
 
 def find_restriction_sites(seq):
     restriction_sites = []
@@ -25,8 +14,6 @@ def find_restriction_sites(seq):
     return restriction_sites
 
 
-assert 'TACG' == complement('ATGC')
-assert 'GCAT' == reverse_complement('ATGC')
 
 if __name__ == "__main__":
     restriction_sites = []
