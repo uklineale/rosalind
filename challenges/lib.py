@@ -1,3 +1,4 @@
+bases = ['A', 'C', 'G', 'T']
 complements = {
     'A' : 'T',
     'C' : 'G',
