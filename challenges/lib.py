@@ -1,3 +1,6 @@
+import sys
+
+bases = ['A','C','G','T']
 complements = {
     'A' : 'T',
     'C' : 'G',
@@ -49,6 +52,40 @@ def substring(source, substring):
         if source[i:i+len(substring)] == substring:
             locations.append(i+1) # 1 indexed
     return locations
+
+def get_profile(strings):
+    # Assumes all strings are same length
+    string_len = len(strings[0])
+    profile = {k: [0] * string_len for k in bases}
+    for s in strings:
+        for i in range(len(s)):
+            nucleotide = s[i]
+            profile[nucleotide][i] += 1
+    return profile
+
+def get_consensus_string(profile):
+    # Assumes all strings are same length
+    string_len = len(profile['A'])
+    consensus_string = ''
+    for i in range(string_len):
+        max = 0
+        consensus_char = ''
+        for k, v in profile.items():
+            if v[i] > max:
+                max = v[i]
+                consensus_char = k
+        consensus_string += consensus_char
+
+    return consensus_string
+
+def arg_path_or_default(default_path):
+    input_file = ''
+    if len(sys.argv) > 1:
+        input_file = sys.argv[1]
+    else:
+        input_file = default_path
+    print("Reading from file: " + input_file)
+    return input_file
 
 assert 'TACG' == complement('ATGC')
 assert 'GCAT' == reverse_complement('ATGC')
