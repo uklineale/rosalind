@@ -1,4 +1,5 @@
 import sys
+from regex import finditer
 
 bases = ['A','C','G','T']
 complements = {
@@ -77,6 +78,13 @@ def get_consensus_string(profile):
         consensus_string += consensus_char
 
     return consensus_string
+
+def get_protein_motif_locations(protein, motif):
+    locations = []
+    pattern = motif.replace('{', '[^').replace('}', ']')
+    for match in finditer(pattern, protein, overlapped=True):
+        locations.append(match.span()[0] + 1) # 1 index
+    return locations
 
 def arg_path_or_default(default_path):
     input_file = ''

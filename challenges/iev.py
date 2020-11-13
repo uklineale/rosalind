@@ -10,5 +10,6 @@ def expected_dominant_offspring(couples):
     return expected_val * 2 # Each couple has 2 offspring
 
 if __name__ == "__main__":
+    assert expected_dominant_offspring(test_couples) == 3.5
     actual_couples = [18793, 16720, 19492, 16568, 17067, 16250]
     print(expected_dominant_offspring(actual_couples))
